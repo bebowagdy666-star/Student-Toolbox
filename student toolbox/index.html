@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Toolbox</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="app-header">
+  <h1>Student Toolbox</h1>
+
+  <nav>
+    <button data-tab="gpa" class="active">GPA</button>
+    <button data-tab="timer">Timer</button>
+    <button data-tab="notes">Notes</button>
+    <button data-tab="summarizer">Summarizer</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= GPA ================= -->
+  <section id="gpa" class="tab active">
+    <h2>GPA Calculator</h2>
+
+    <select id="gradingScale">
+      <option value="4.0">4.0 Scale</option>
+      <option value="4.3">4.3 Scale</option>
+    </select>
+
+    <div id="subjects"></div>
+
+    <button id="addSubject">+ Add Subject</button>
+    <button id="calculateGPA">Calculate</button>
+
+    <div id="gpaResult"></div>
+  </section>
+
+  <!-- ================= TIMER ================= -->
+  <section id="timer" class="tab">
+    <h2>Pomodoro Timer</h2>
+
+    <div id="timerDisplay">25:00</div>
+    <div id="timerMode"></div>
+    <div id="breakHint"></div>
+
+    <input type="number" id="workTime" placeholder="Work (min)">
+    <input type="number" id="breakTime" placeholder="Break (min)">
+
+    <button id="startTimer">Start</button>
+    <button id="pauseTimer">Pause</button>
+    <button id="resetTimer">Reset</button>
+  </section>
+
+  <!-- ================= NOTES ================= -->
+  <section id="notes" class="tab">
+    <h2>Notes</h2>
+
+    <input id="searchNotes" placeholder="Search notes...">
+    <textarea id="noteInput"></textarea>
+    <button id="saveNote">Save</button>
+
+    <div id="notesList"></div>
+  </section>
+
+  <!-- ================= SUMMARIZER ================= -->
+  <section id="summarizer" class="tab">
+    <h2>Text Summarizer</h2>
+
+    <textarea id="inputText"></textarea>
+    <button id="summarizeBtn">Summarize</button>
+
+    <div id="summaryOutput"></div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
