@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const display = document.getElementById("timerDisplay");
   const modeLabel = document.getElementById("timerMode");
   const hint = document.getElementById("breakHint");
-  const section = document.getElementById("timer");
 
   const beep = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
 
@@ -241,59 +240,5 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   renderNotes();
-
-  // ===================== SUMMARIZER =====================
-  document.getElementById("summarizeBtn").onclick = () => {
-    const text = document.getElementById("inputText").value.trim();
-    const output = document.getElementById("summaryOutput");
-
-    if (!text) {
-      output.textContent = "Please enter text.";
-      return;
-    }
-
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
-
-    if (sentences.length <= 2) {
-      output.textContent = text;
-      return;
-    }
-
-    const stopWords = new Set([
-      "the","is","in","and","to","of","a","for","on","with",
-      "as","by","at","an","be","this","that","it","from","or"
-    ]);
-
-    const words = text.toLowerCase().match(/\w+/g) || [];
-
-    const freq = {};
-    words.forEach(w => {
-      if (!stopWords.has(w)) {
-        freq[w] = (freq[w] || 0) + 1;
-      }
-    });
-
-    const maxFreq = Math.max(...Object.values(freq));
-
-    for (let w in freq) freq[w] /= maxFreq;
-
-    const scored = sentences.map((s, i) => {
-      const ws = s.toLowerCase().match(/\w+/g) || [];
-      let score = 0;
-
-      ws.forEach(w => {
-        if (freq[w]) score += freq[w];
-      });
-
-      return { s, score, i };
-    });
-
-    const top = scored
-      .sort((a, b) => b.score - a.score)
-      .slice(0, Math.ceil(scored.length * 0.4))
-      .sort((a, b) => a.i - b.i);
-
-    output.innerHTML = top.map(x => "• " + x.s.trim()).join("<br><br>");
-  };
 
 });
